@@ -48,7 +48,10 @@
       "entry": "QR code opens public receipt URL after deployment/backend storage; local-only demo shows a clear disabled state",
       "mobile_primary_flow": "read verdict, payout state, receipt hash, proof status, and copy/download JSON",
       "desktop_parity_plan": "desktop keeps agent, evaluator, receipt, and proof rail visible at 1920x1200",
-      "viewports_to_test": ["390x844", "1920x1200"]
+      "viewports_to_test": [
+        "390x844",
+        "1920x1200"
+      ]
     },
     "asset_sources": {
       "logo": "logo-generator skill output; current fallback text wordmark",
@@ -60,7 +63,10 @@
         "command": "not used for P0; proof-console visual system is UI-native"
       }
     },
-    "motion": ["CSS motion", "optional framer-motion if already installed"]
+    "motion": [
+      "CSS motion",
+      "optional framer-motion if already installed"
+    ]
   },
   "web3": {
     "chain": "mantle-sepolia-optional-event + ready-calldata fallback",
@@ -74,10 +80,16 @@
       "genericCloneToAvoid": "wallet dashboard / agent directory / crypto chatbot"
     },
     "contractsFramework": "hardhat or viem script",
-    "walletLibs": ["viem"],
+    "walletLibs": [
+      "viem"
+    ],
     "envBakedDemo": false,
     "demoWalletPlacement": "wallet-free first minute; optional notarization after receipt exists",
-    "demoRoles": ["judge", "task sponsor", "agent builder"],
+    "demoRoles": [
+      "judge",
+      "task sponsor",
+      "agent builder"
+    ],
     "chainId": 5003,
     "rpc": "https://rpc.sepolia.mantle.xyz",
     "explorer": "https://explorer.sepolia.mantle.xyz"
@@ -94,14 +106,15 @@
     },
     "contracts": "optional Mantle Sepolia ProofBenchReceiptEmitter deployment when PRIVATE_KEY is provided",
     "production_url": "https://proofbench.veithly.workers.dev",
-    "production_version_id": "cf9e4687-f05f-4bf2-9728-ae5f7a066ac9",
-    "smoke_tested_at": "2026-06-08T20:46:06+08:00",
+    "production_version_id": "3a88579b-9d8e-4c4a-a4d3-a5edd86dc0fc",
+    "smoke_tested_at": "2026-06-08T22:41:30+08:00",
     "smoke_evidence": {
       "proof_health": "curl https://proofbench.veithly.workers.dev/api/proof-health",
       "playwright_live": "PLAYWRIGHT_BASE_URL=https://proofbench.veithly.workers.dev npx playwright test tests/onboard.spec.ts tests/receipt-detail-integrity.spec.ts tests/chain-limitation-fallback.spec.ts tests/keyboard-accessibility.spec.ts",
       "visual_qa_live": "visual_qa_scan.mjs --url https://proofbench.veithly.workers.dev --routes /,/run,/ledger,/proof,/about --fail-on error; 10/10 desktop/mobile route scans passed with 0 errors and 0 warnings",
       "browser_live_desktop": "desktop hero path generated PASS receipt with ready calldata and no UI errors",
-      "browser_live_mobile": "390x844 mobile viewport had no horizontal overflow and no small visible tap targets"
+      "browser_live_mobile": "390x844 mobile viewport had no horizontal overflow and no small visible tap targets",
+      "video_url": "curl -I https://proofbench.veithly.workers.dev/demo/proofbench-demo.mp4; HTTP 200 video/mp4, 12,197,703 bytes"
     },
     "cloudflare_override_reason": ""
   },
@@ -183,7 +196,12 @@
   "product_backbone": {
     "identity": "guest browser session",
     "storage": "browser localStorage for P0; Cloudflare D1 planned for public share URLs",
-    "ownership_fields": ["sessionId", "agentId", "receiptId", "walletAddress"],
+    "ownership_fields": [
+      "sessionId",
+      "agentId",
+      "receiptId",
+      "walletAddress"
+    ],
     "multi_user_proof": "two browser sessions create independent local receipts; P1 public receipt URLs allow cross-user verification",
     "stateless_exception_reason": "G4 P0 is an owner-scoped browser receipt bench: local ledger storage is intentional before public D1 share URLs, while every receipt still carries sessionId/userId/ownerId and deterministic replay proof."
   },
@@ -232,5 +250,11 @@
     "db": "localStorage P0, Cloudflare D1 future",
     "analytics": null,
     "errorTracking": null
+  },
+  "repository": {
+    "url": "https://github.com/veithly/proofbench",
+    "visibility": "public",
+    "default_branch": "main",
+    "commit": "6e9759a26a3b392f3cdd05472ed5a576e1bfe4b8"
   }
 }
