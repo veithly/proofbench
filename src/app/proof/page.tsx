@@ -20,9 +20,10 @@ export default function ProofPage() {
         <Panel title="Contract target">
           <ul className="plain-list">
             <li>Contract: `contracts/ProofBenchReceiptEmitter.sol`</li>
+            <li>Emitter: `0xa9df142d14218cc99f3068cbadc1d1965f7623b7`</li>
             <li>Chain: Mantle Sepolia, chain ID 5003</li>
             <li>Route: `POST /api/notarize`</li>
-            <li>Status: event write when `PRIVATE_KEY` and `PROOFBENCH_EMITTER_ADDRESS` exist; ready calldata otherwise.</li>
+            <li>Status: event write when the relayer secret is present; ready calldata otherwise.</li>
           </ul>
           <div className="empty-examples">
             <button className="min-h-11 min-w-11" data-placeholder-example="Ready calldata">Ready calldata</button>

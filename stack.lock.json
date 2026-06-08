@@ -10,7 +10,7 @@
   },
   "delivery_mode": "combined-pitch-demo",
   "delivery_mode_reason": "DoraHacks-style online submission prioritizes demo URL, repo URL, and video; build one combined pitch+demo video and keep deck as backup.",
-  "video_target_duration_s": 240,
+  "video_target_duration_s": 69,
   "video_resolution": "1920x1200",
   "video_composer": "hyperframes",
   "frontend": {
@@ -69,7 +69,7 @@
     ]
   },
   "web3": {
-    "chain": "mantle-sepolia-optional-event + ready-calldata fallback",
+    "chain": "mantle-sepolia-live-event + ready-calldata fallback",
     "winnerThesis": {
       "trackProblem": "agent buyers need useful-work proof before payout and reputation",
       "winnerPattern": "protocol action primitive",
@@ -92,7 +92,17 @@
     ],
     "chainId": 5003,
     "rpc": "https://rpc.sepolia.mantle.xyz",
-    "explorer": "https://explorer.sepolia.mantle.xyz"
+    "explorer": "https://explorer.sepolia.mantle.xyz",
+    "contract": {
+      "name": "ProofBenchReceiptEmitter",
+      "address": "0xa9df142d14218cc99f3068cbadc1d1965f7623b7",
+      "explorer_url": "https://explorer.sepolia.mantle.xyz/address/0xa9df142d14218cc99f3068cbadc1d1965f7623b7",
+      "deploy_tx": "0x9ba37d2cd13ada8cb187b565521394eb5f98174c09c18a1b493d1a781701b0cd",
+      "deploy_tx_url": "https://explorer.sepolia.mantle.xyz/tx/0x9ba37d2cd13ada8cb187b565521394eb5f98174c09c18a1b493d1a781701b0cd",
+      "latest_demo_tx": "0x7372d1fb22ffe5a9f8619b4573a9760ad7bd2b8401b575aab97ca7ac087d74a3",
+      "latest_demo_tx_url": "https://explorer.sepolia.mantle.xyz/tx/0x7372d1fb22ffe5a9f8619b4573a9760ad7bd2b8401b575aab97ca7ac087d74a3",
+      "relayer_address": "0x2eE81C112CA5A5Fd7123644f4c18262a05175c66"
+    }
   },
   "deploy": {
     "frontend": "cloudflare-workers",
@@ -114,7 +124,9 @@
       "visual_qa_live": "visual_qa_scan.mjs --url https://proofbench.veithly.workers.dev --routes /,/run,/ledger,/proof,/about --fail-on error; 10/10 desktop/mobile route scans passed with 0 errors and 0 warnings",
       "browser_live_desktop": "desktop hero path generated PASS receipt with ready calldata and no UI errors",
       "browser_live_mobile": "390x844 mobile viewport had no horizontal overflow and no small visible tap targets",
-      "video_url": "curl -I https://proofbench.veithly.workers.dev/demo/proofbench-demo.mp4; HTTP 200 video/mp4, 12,197,703 bytes"
+      "worker_video_removed": "curl -I https://proofbench.veithly.workers.dev/demo/proofbench-demo.mp4; HTTP 404 after removing the Worker-hosted MP4. Canonical video is https://www.youtube.com/watch?v=UzX3FWcmz3k.",
+      "youtube_unlisted": "YouTube Studio video detail shows Visibility: Unlisted and Restrictions: None; screenshot pitch/youtube-upload-confirmation.png.",
+      "mantle_sepolia_demo_tx": "https://explorer.sepolia.mantle.xyz/tx/0x7372d1fb22ffe5a9f8619b4573a9760ad7bd2b8401b575aab97ca7ac087d74a3"
     },
     "cloudflare_override_reason": ""
   },
@@ -141,7 +153,7 @@
       "required_for": "optional live Mantle Sepolia event write",
       "official_key_url": "https://docs.mantle.xyz/network/for-developers/mantle-sepolia-testnet",
       "storage": ".env.local for local scripts; Wrangler secret only if runtime signing is enabled",
-      "status": "not-required",
+      "status": "configured-for-demo-relayer",
       "required": false,
       "optional": true,
       "alias_of": "PRIVATE_KEY"
@@ -152,7 +164,7 @@
       "required_for": "optional live Mantle Sepolia event write through POST /api/notarize",
       "official_key_url": "https://docs.mantle.xyz/network/for-developers/mantle-sepolia-testnet",
       "storage": ".env.local for local scripts; Wrangler secret only if runtime signing is enabled",
-      "status": "not-required",
+      "status": "configured-for-demo-relayer",
       "required": false,
       "optional": true
     },
@@ -162,7 +174,7 @@
       "required_for": "optional target contract for Mantle Sepolia event write",
       "official_key_url": "https://explorer.sepolia.mantle.xyz",
       "storage": ".env.local / Wrangler variable",
-      "status": "not-required",
+      "status": "configured",
       "required": false,
       "optional": true
     }
@@ -254,7 +266,6 @@
   "repository": {
     "url": "https://github.com/veithly/proofbench",
     "visibility": "public",
-    "default_branch": "main",
-    "commit": "6e9759a26a3b392f3cdd05472ed5a576e1bfe4b8"
+    "default_branch": "main"
   }
 }

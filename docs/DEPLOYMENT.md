@@ -13,6 +13,7 @@ ProofBench deploys the Next.js app to Cloudflare Workers through OpenNext and Wr
 - Service binding: `WORKER_SELF_REFERENCE`
 - Observability: enabled
 - Public RPC var: `MANTLE_SEPOLIA_RPC_URL=https://rpc.sepolia.mantle.xyz`
+- Receipt emitter: `0xa9df142d14218cc99f3068cbadc1d1965f7623b7`
 
 No Cloudflare storage binding required for P0. Receipts use browser-owned local storage during the hackathon demo; Cloudflare D1 is the planned upgrade for public shared receipt URLs.
 
@@ -22,16 +23,16 @@ Configured in `wrangler.jsonc`:
 
 ```bash
 MANTLE_SEPOLIA_RPC_URL=https://rpc.sepolia.mantle.xyz
+PROOFBENCH_EMITTER_ADDRESS=0xa9df142d14218cc99f3068cbadc1d1965f7623b7
 ```
 
-Optional runtime notarization values:
+Runtime notarization secret:
 
 ```bash
 npx wrangler secret put PRIVATE_KEY
-npx wrangler secret put PROOFBENCH_EMITTER_ADDRESS
 ```
 
-`PRIVATE_KEY` must be a throwaway Mantle Sepolia relayer key. `PROOFBENCH_EMITTER_ADDRESS` must point to a deployed `ProofBenchReceiptEmitter` contract. If either value is absent, the live app stays honest and shows generated calldata instead of a fabricated transaction hash.
+`PRIVATE_KEY` must be a throwaway Mantle Sepolia relayer key with testnet MNT. If the secret is absent, the live app stays honest and shows generated calldata instead of a fabricated transaction hash.
 
 ## Deploy Commands
 

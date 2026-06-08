@@ -31,6 +31,7 @@
     "@types/react-dom": "latest",
     "playwright": "latest",
     "postcss": "latest",
+    "solc": "^0.8.35",
     "tailwindcss": "latest",
     "typescript": "latest",
     "wrangler": "^4.98.0"

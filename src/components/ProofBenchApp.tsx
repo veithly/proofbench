@@ -15,7 +15,8 @@ import {
   RefreshCw,
   Search,
   ShieldCheck,
-  SlidersHorizontal
+  SlidersHorizontal,
+  Wallet
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
@@ -93,7 +94,8 @@ export function ProofBenchApp() {
   const progressSteps: Array<[string, boolean, LucideIcon]> = [
     ["Agent output", Boolean(output), ClipboardCheck],
     ["Evaluator score", Boolean(evaluation), ShieldCheck],
-    ["Payout receipt", Boolean(receipt), Hash]
+    ["Payout receipt", Boolean(receipt), Hash],
+    ["Sepolia event", Boolean(receipt?.proof.txHash), Wallet]
   ];
   const filteredReceipts = useMemo(() => {
     const term = searchTerm.trim().toLowerCase();
@@ -294,12 +296,21 @@ export function ProofBenchApp() {
             <article className="receipt-card" data-testid="receipt-card">
               <EvidenceLine label="Receipt" value={shortHash(receipt.receiptHash, 14, 10)} mono testId="receipt-hash" />
               <EvidenceLine label="Proof" value={receipt.proof.status.replaceAll("_", " ")} />
+              {receipt.proof.txHash && (
+                <EvidenceLine label="Sepolia tx" value={shortHash(receipt.proof.txHash, 14, 8)} mono testId="sepolia-tx-hash" />
+              )}
               <EvidenceLine label="Owner" value={shortHash(receipt.ownerId, 10, 4)} mono />
               <div className="receipt-actions">
                 <Link className="button button-primary" href={`/receipt/${receipt.id}`}>
                   <Receipt aria-hidden="true" />
                   Open receipt
                 </Link>
+                {receipt.proof.explorerUrl && (
+                  <a className="button button-secondary" href={receipt.proof.explorerUrl} target="_blank" rel="noreferrer" data-testid="open-sepolia-event">
+                    <ArrowRight aria-hidden="true" />
+                    Sepolia event
+                  </a>
+                )}
                 <button className="button button-secondary min-h-11 min-w-11" data-testid="export-json" onClick={copyReceiptJson}>
                   <FileJson aria-hidden="true" />
                   Copy JSON

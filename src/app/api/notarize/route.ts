@@ -25,7 +25,8 @@ export async function POST(request: Request) {
 
     const calldata = buildLedgerCalldata(body.receipt);
     const address = process.env.PROOFBENCH_EMITTER_ADDRESS as `0x${string}` | undefined;
-    const privateKey = process.env.PRIVATE_KEY as `0x${string}` | undefined;
+    const privateKeyValue = process.env.PRIVATE_KEY;
+    const privateKey = privateKeyValue ? (privateKeyValue.startsWith("0x") ? privateKeyValue : `0x${privateKeyValue}`) as `0x${string}` : undefined;
 
     if (!address || !privateKey) {
       return NextResponse.json({
@@ -38,24 +39,35 @@ export async function POST(request: Request) {
       });
     }
 
-    const account = privateKeyToAccount(privateKey);
-    const client = createWalletClient({
-      account,
-      chain: mantleSepolia,
-      transport: http(process.env.MANTLE_SEPOLIA_RPC_URL || "https://rpc.sepolia.mantle.xyz")
-    });
-    const txHash = await client.sendTransaction({ to: address, data: calldata, value: 0n });
+    try {
+      const account = privateKeyToAccount(privateKey);
+      const client = createWalletClient({
+        account,
+        chain: mantleSepolia,
+        transport: http(process.env.MANTLE_SEPOLIA_RPC_URL || "https://rpc.sepolia.mantle.xyz")
+      });
+      const txHash = await client.sendTransaction({ to: address, data: calldata, value: 0n });
 
-    return NextResponse.json({
-      proof: {
-        ...body.receipt.proof,
-        status: "sepolia_anchored",
-        calldata,
-        txHash,
-        explorerUrl: `https://explorer.sepolia.mantle.xyz/tx/${txHash}`,
-        limitation: ""
-      }
-    });
+      return NextResponse.json({
+        proof: {
+          ...body.receipt.proof,
+          status: "sepolia_anchored",
+          calldata,
+          txHash,
+          explorerUrl: `https://explorer.sepolia.mantle.xyz/tx/${txHash}`,
+          limitation: ""
+        }
+      });
+    } catch (sendError) {
+      return NextResponse.json({
+        proof: {
+          ...body.receipt.proof,
+          status: "ready_calldata",
+          calldata,
+          limitation: `Relayer could not submit this receipt right now: ${sendError instanceof Error ? sendError.message : "transaction failed"}`
+        }
+      });
+    }
   } catch (error) {
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Notarization failed." },

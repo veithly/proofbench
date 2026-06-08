@@ -92,6 +92,9 @@ event ProofBenchReceiptRecorded(
 
 No code path fabricates a transaction hash.
 
+Current Mantle Sepolia emitter: `0xa9df142d14218cc99f3068cbadc1d1965f7623b7`.
+Deployment transaction: `0x9ba37d2cd13ada8cb187b565521394eb5f98174c09c18a1b493d1a781701b0cd`.
+
 ## Storage and ownership
 
 P0 uses browser localStorage:
@@ -119,7 +122,7 @@ The deployment runbook is [docs/DEPLOYMENT.md](./DEPLOYMENT.md).
 
 ## Security boundary
 
-- `PRIVATE_KEY` and `PROOFBENCH_EMITTER_ADDRESS` are server-only.
+- `PRIVATE_KEY` is server-only; `PROOFBENCH_EMITTER_ADDRESS` is public contract configuration.
 - The browser never receives relayer secrets.
 - First value does not require wallet connect.
 - P0 payout is simulated MNT and clearly labeled.

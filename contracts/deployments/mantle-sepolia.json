@@ -1,0 +1,16 @@
+{
+  "network": "mantle-sepolia",
+  "chainId": 5003,
+  "rpcUrl": "https://rpc.sepolia.mantle.xyz",
+  "deployer": "0x2eE81C112CA5A5Fd7123644f4c18262a05175c66",
+  "contractName": "ProofBenchReceiptEmitter",
+  "contractAddress": "0xa9df142d14218cc99f3068cbadc1d1965f7623b7",
+  "deploymentTxHash": "0x9ba37d2cd13ada8cb187b565521394eb5f98174c09c18a1b493d1a781701b0cd",
+  "deploymentExplorerUrl": "https://explorer.sepolia.mantle.xyz/tx/0x9ba37d2cd13ada8cb187b565521394eb5f98174c09c18a1b493d1a781701b0cd",
+  "contractExplorerUrl": "https://explorer.sepolia.mantle.xyz/address/0xa9df142d14218cc99f3068cbadc1d1965f7623b7",
+  "blockNumber": "39700202",
+  "gasUsed": "117239",
+  "balanceBeforeMnt": "90",
+  "balanceAfterMnt": "89.9901295525204999",
+  "deployedAt": "2026-06-08T18:57:58.876Z"
+}

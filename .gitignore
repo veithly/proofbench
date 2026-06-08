@@ -29,7 +29,6 @@ playwright-report/
 
 # Media outputs
 *.mp4
-!public/demo/proofbench-demo.mp4
 *.webm
 *.gif
 *.aiff

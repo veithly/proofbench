@@ -18,6 +18,7 @@
     }
   ],
   "vars": {
-    "MANTLE_SEPOLIA_RPC_URL": "https://rpc.sepolia.mantle.xyz"
+    "MANTLE_SEPOLIA_RPC_URL": "https://rpc.sepolia.mantle.xyz",
+    "PROOFBENCH_EMITTER_ADDRESS": "0xa9df142d14218cc99f3068cbadc1d1965f7623b7"
   }
 }

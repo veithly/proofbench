@@ -11,7 +11,7 @@
 _A task sponsor runs one bounded quote-guard job, sees PASS or FAIL, and gets a receipt that binds agent identity, evaluator rules, payout state, reputation delta, and Mantle Sepolia calldata._
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Open-2dd4bf?style=for-the-badge)](https://proofbench.veithly.workers.dev)
-[![Demo Video](https://img.shields.io/badge/Demo_Video-Watch-ef4444?style=for-the-badge)](https://proofbench.veithly.workers.dev/demo/proofbench-demo.mp4)
+[![Demo Video](https://img.shields.io/badge/Demo_Video-YouTube-ef4444?style=for-the-badge)](#demo-video)
 [![Cloudflare](https://img.shields.io/badge/Deploy-Workers-f97316?style=for-the-badge)](./docs/DEPLOYMENT.md)
 
 **Quick links:**
@@ -27,7 +27,7 @@ _A task sponsor runs one bounded quote-guard job, sees PASS or FAIL, and gets a 
 
 Agent buyers can see polished profiles, chat logs, and screenshots. They still cannot answer the question that decides payment: did this agent complete the paid task under the rules we agreed on?
 
-ProofBench narrows that problem to one repeatable loop. A quote-guard agent selects a Mantle USDC -> MNT route, a deterministic evaluator scores the output, and the app writes the result into a receipt. The receipt carries the hashes needed to replay the decision and the calldata needed to anchor it on Mantle Sepolia when a relayer key and emitter address are configured.
+ProofBench narrows that problem to one repeatable loop. A quote-guard agent selects a Mantle USDC -> MNT route, a deterministic evaluator scores the output, and the app writes the result into a receipt. The receipt carries the hashes needed to replay the decision plus a Mantle Sepolia event path; the submitted demo uses a funded demo relayer and a deployed emitter contract.
 
 | | Agent marketplace claim | Manual payout review | **ProofBench** |
 | --- | --- | --- | --- |
@@ -99,7 +99,7 @@ The P0 task is `QG-MNT-001`: choose the safest eligible route for swapping 100.0
 | Evaluator | Deterministic `quote_guard_evaluator:v1.0.0` | Judges can replay the rules and verify score lines | LLM-only scoring, cut for trust |
 | First value | Wallet-free browser session | A fresh reviewer sees the economic consequence in the first minute | Wallet connect first, cut for friction |
 | State | Local receipt ledger for P0 | Each browser stores receipts, reputation, replay inputs, and JSON export | Cloudflare D1 public receipts, planned P1 |
-| Chain path | Mantle Sepolia event or ready calldata | Honest onchain path without pretending a tx happened | Mainnet escrow, cut for safety |
+| Chain path | Mantle Sepolia event plus ready calldata fallback | Honest onchain path without pretending a tx happened | Mainnet escrow, cut for safety |
 
 Full data model and security boundary live in [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md).
 
@@ -110,7 +110,7 @@ Full data model and security boundary live in [docs/ARCHITECTURE.md](./docs/ARCH
 | Layer | Choice | Notes |
 | --- | --- | --- |
 | Frontend | Next.js App Router + custom proof-console UI | Dense workbench with agent, evaluator, and receipt rail visible together |
-| Web3 | viem + Mantle Sepolia metadata | Optional emitter call uses `PROOFBENCH_EMITTER_ADDRESS` and `PRIVATE_KEY` |
+| Web3 | viem + Mantle Sepolia event emitter | Live emitter `0xa9df142d14218cc99f3068cbadc1d1965f7623b7` records receipt events |
 | Storage | Browser localStorage | P0 keeps owner-scoped receipts local; D1 is the public sharing follow-up |
 | Deploy | Cloudflare Workers via OpenNext | Live at `https://proofbench.veithly.workers.dev` |
 | Testing | Playwright + HackathonHunter audits | Local and deployed smoke tests cover the hero path, receipt detail, fallback proof, and keyboard access |
@@ -130,8 +130,8 @@ Full data model and security boundary live in [docs/ARCHITECTURE.md](./docs/ARCH
 - ProofBench does not move mainnet funds.
 - P0 payout is simulated MNT, labeled in the UI, and used only to show the economic decision.
 - The evaluator is deterministic code, not a hidden LLM payout judge.
-- Mantle Sepolia writes run only when `PROOFBENCH_EMITTER_ADDRESS` and `PRIVATE_KEY` are configured server-side.
-- Without those values, the app returns ready calldata and a limitation banner instead of a fake transaction hash.
+- Mantle Sepolia writes use deployed emitter `0xa9df142d14218cc99f3068cbadc1d1965f7623b7` when the server relayer secret is configured.
+- Without server relayer values, the app returns ready calldata and a limitation banner instead of a fake transaction hash.
 - Receipt data stays local to the browser in P0 unless the user exports JSON.
 
 ## Repository layout
@@ -144,9 +144,17 @@ Full data model and security boundary live in [docs/ARCHITECTURE.md](./docs/ARCH
 ├── contracts/                  # Mantle Sepolia receipt emitter contract
 ├── tests/                      # Playwright hero, replay, proof, and accessibility specs
 ├── docs/                       # Architecture, deployment, screenshots, Chinese README
-└── public/                     # Brand assets and hosted demo MP4
+└── public/                     # Brand assets
 ```
 
 ## Demo video
 
-The 60-second combined pitch/demo cut is hosted at <https://proofbench.veithly.workers.dev/demo/proofbench-demo.mp4>. A local copy also lives at `public/demo/proofbench-demo.mp4` for repository verification.
+The final combined pitch/demo cut is published as an unlisted YouTube video for submission:
+
+https://www.youtube.com/watch?v=UzX3FWcmz3k
+
+The Worker does not serve the MP4 directly. The recorded run shows the funded demo relayer wallet connected before receipt creation and anchors the receipt on Mantle Sepolia:
+
+- Emitter contract: `0xa9df142d14218cc99f3068cbadc1d1965f7623b7`
+- Contract explorer: https://explorer.sepolia.mantle.xyz/address/0xa9df142d14218cc99f3068cbadc1d1965f7623b7
+- Demo tx: https://explorer.sepolia.mantle.xyz/tx/0x7372d1fb22ffe5a9f8619b4573a9760ad7bd2b8401b575aab97ca7ac087d74a3
