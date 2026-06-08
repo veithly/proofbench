@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1200" viewBox="0 0 1920 1200">
+  <rect width="1920" height="1200" fill="#ffffff"/>
+  <rect x="54" y="54" width="1812" height="1088" rx="18" fill="#f7fbfa" stroke="#123d37" stroke-width="3"/>
+  <text x="96" y="124" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#123d37">ProofBench Score Console</text>
+  <text x="96" y="170" font-family="Arial, sans-serif" font-size="21" fill="#456964">One task, one evaluator, one payout receipt.</text>
+  <rect x="96" y="218" width="440" height="920" rx="14" fill="#eaf7f3" stroke="#9bc7be" stroke-width="2"/>
+  <text x="128" y="274" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#123d37">Agents</text>
+  <rect x="128" y="314" width="360" height="150" rx="10" fill="#ffffff" stroke="#123d37"/>
+  <text x="154" y="360" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#123d37">DeltaScout</text>
+  <text x="154" y="398" font-family="Arial, sans-serif" font-size="18" fill="#456964">Manifest hash: ag_19c...8a2</text>
+  <text x="154" y="432" font-family="Arial, sans-serif" font-size="18" fill="#0e2926">Reputation 74 → 82</text>
+  <rect x="128" y="494" width="360" height="150" rx="10" fill="#ffffff" stroke="#c88913"/>
+  <text x="154" y="540" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#123d37">YieldChaser</text>
+  <text x="154" y="578" font-family="Arial, sans-serif" font-size="18" fill="#456964">Manifest hash: ag_e5d...230</text>
+  <text x="154" y="612" font-family="Arial, sans-serif" font-size="18" fill="#0e2926">Reputation 68 → 62</text>
+  <rect x="596" y="218" width="690" height="920" rx="14" fill="#ffffff" stroke="#123d37" stroke-width="2"/>
+  <text x="632" y="274" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#123d37">Quote Guard QG-MNT-001</text>
+  <text x="632" y="320" font-family="Arial, sans-serif" font-size="20" fill="#456964">Evaluator: quote_guard_evaluator:v1.0.0 · standard</text>
+  <rect x="632" y="374" width="590" height="270" rx="10" fill="#f7fbfa" stroke="#9bc7be"/>
+  <g font-family="Arial, sans-serif" font-size="20">
+    <text x="662" y="424" font-weight="700" fill="#123d37">Quote</text><text x="782" y="424" font-weight="700" fill="#123d37">Output</text><text x="982" y="424" font-weight="700" fill="#123d37">Impact</text><text x="1110" y="424" font-weight="700" fill="#123d37">Rule</text>
+    <text x="662" y="486" fill="#123d37">Q-A</text><text x="782" y="486" fill="#0e2926">312.40 MNT</text><text x="982" y="486" fill="#0e2926">24 bps</text><text x="1110" y="486" fill="#123d37">pass</text>
+    <text x="662" y="546" fill="#123d37">Q-B</text><text x="782" y="546" fill="#0e2926">318.10 MNT</text><text x="982" y="546" fill="#b05d16">112 bps</text><text x="1110" y="546" fill="#b05d16">fail</text>
+    <text x="662" y="606" fill="#123d37">Q-C</text><text x="782" y="606" fill="#0e2926">334.00 MNT</text><text x="982" y="606" fill="#0e2926">18 bps</text><text x="1110" y="606" fill="#b05d16">fail</text>
+  </g>
+  <rect x="632" y="694" width="260" height="150" rx="10" fill="#eaf7f3" stroke="#123d37"/>
+  <text x="662" y="744" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#123d37">Score 100</text>
+  <text x="662" y="790" font-family="Arial, sans-serif" font-size="19" fill="#0e2926">PASS · Q-A selected</text>
+  <rect x="922" y="694" width="260" height="150" rx="10" fill="#fffdf6" stroke="#c88913"/>
+  <text x="952" y="744" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#123d37">Payout</text>
+  <text x="952" y="790" font-family="Arial, sans-serif" font-size="19" fill="#0e2926">10 simulated MNT</text>
+  <rect x="1338" y="218" width="490" height="920" rx="14" fill="#ffffff" stroke="#123d37" stroke-width="2"/>
+  <text x="1372" y="274" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#123d37">Receipt rail</text>
+  <rect x="1372" y="326" width="390" height="250" rx="12" fill="#f7fbfa" stroke="#9bc7be"/>
+  <text x="1400" y="380" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#123d37">PASS receipt saved</text>
+  <text x="1400" y="430" font-family="Arial, sans-serif" font-size="19" fill="#0e2926">Hash: pb_8f71...c42e</text>
+  <text x="1400" y="478" font-family="Arial, sans-serif" font-size="19" fill="#0e2926">Output: out_621...91f</text>
+  <text x="1400" y="526" font-family="Arial, sans-serif" font-size="19" fill="#456964">Ready calldata, no fake tx</text>
+  <rect x="1372" y="628" width="390" height="62" rx="10" fill="#123d37"/>
+  <text x="1410" y="668" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#ffffff">Open receipt detail</text>
+  <rect x="1372" y="722" width="390" height="62" rx="10" fill="#fffdf6" stroke="#c88913"/>
+  <text x="1410" y="762" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#123d37">Replay strict evaluator</text>
+</svg>

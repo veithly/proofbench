@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Next.js / Cloudflare build output
+.next/
+.open-next/
+.wrangler/
+.vercel/
+dist/
+out/
+
+# Local env and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Hackathon private working artefacts
+SUBMISSION.md
+.hunter/
+.hyperframes/
+artifacts/
+pitch/
+task_plan.md
+notes.md
+test-results/
+playwright-report/
+
+# Media outputs
+*.mp4
+!public/demo/proofbench-demo.mp4
+*.webm
+*.gif
+*.aiff
+*.mp3
+
+# Local video-generation helpers
+scripts/capture-g6-assets.mjs
+scripts/create-g6-narration.mjs
+scripts/finalize-g6-video.mjs
+
+# OS/editor
+.DS_Store
+*.log

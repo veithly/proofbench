@@ -1,0 +1,38 @@
+{
+  "name": "proofbench",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 4388",
+    "build": "next build",
+    "start": "next start -p 4388",
+    "build:worker": "opennextjs-cloudflare build",
+    "preview:worker": "opennextjs-cloudflare preview --port 4389",
+    "deploy": "npm run build:worker && wrangler deploy",
+    "deploy:dry-run": "npm run build:worker && wrangler deploy --dry-run",
+    "deploy:opennext": "opennextjs-cloudflare deploy",
+    "test": "playwright test",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@opennextjs/cloudflare": "^1.19.11",
+    "clsx": "latest",
+    "lucide-react": "latest",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "viem": "latest"
+  },
+  "devDependencies": {
+    "@playwright/test": "latest",
+    "@tailwindcss/postcss": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "playwright": "latest",
+    "postcss": "latest",
+    "tailwindcss": "latest",
+    "typescript": "latest",
+    "wrangler": "^4.98.0"
+  }
+}

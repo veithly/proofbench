@@ -1,0 +1,236 @@
+{
+  "$schema": "https://hackathonhunter.example.com/schemas/stack.lock.json",
+  "project": "ProofBench",
+  "branch": "WEB3",
+  "project_language": "English",
+  "hackathon": {
+    "name": "Mantle Turing Test Hackathon 2026 - Phase II AI Awakening",
+    "url": "https://dorahacks.io/hackathon/mantleturingtesthackathon2026/detail",
+    "deadline": "2026-06-15"
+  },
+  "delivery_mode": "combined-pitch-demo",
+  "delivery_mode_reason": "DoraHacks-style online submission prioritizes demo URL, repo URL, and video; build one combined pitch+demo video and keep deck as backup.",
+  "video_target_duration_s": 240,
+  "video_resolution": "1920x1200",
+  "video_composer": "hyperframes",
+  "frontend": {
+    "framework": "next@latest",
+    "styling": "tailwind@latest",
+    "dependency_policy": "frontend deps install with @latest/unversioned targets unless an override_reason is recorded",
+    "visual_style_lane": "data-newsroom",
+    "primary_ui_library": "shadcn/ui primitives adapted into custom proof-console shell",
+    "supporting_ui_library": "lucide-react icons + lightweight CSS motion",
+    "non_tailwind_visual_signature": "split-screen receipt bench with quote ledgers, evaluator rule stamps, proof-hash perforation marks, and binary payout ribbons",
+    "component_blocks": [
+      "HeroBanner",
+      "AgentCard",
+      "TaskFixtureCard",
+      "EvaluatorRulesPanel",
+      "RunTimeline",
+      "VerdictCard",
+      "PayoutStateCard",
+      "ReputationDeltaCard",
+      "ReceiptHashCard",
+      "MantleProofPanel",
+      "ReceiptLedgerTable",
+      "ReplayDrawer"
+    ],
+    "hero_composition": "full-width workbench: agents left, task and evaluator center, receipt/proof rail right",
+    "visual_differentiation_note": "white/ink/mint proof-console surfaces with amber failure states, monospace hash strips, and receipt textures instead of purple crypto dashboards",
+    "forbidden_lookalikes": [
+      "generic dark DeFi dashboard",
+      "Etherscan clone",
+      "agent marketplace directory",
+      "purple AI gradient hero",
+      "wallet portfolio tracker"
+    ],
+    "qr_mobile_access": {
+      "entry": "QR code opens public receipt URL after deployment/backend storage; local-only demo shows a clear disabled state",
+      "mobile_primary_flow": "read verdict, payout state, receipt hash, proof status, and copy/download JSON",
+      "desktop_parity_plan": "desktop keeps agent, evaluator, receipt, and proof rail visible at 1920x1200",
+      "viewports_to_test": ["390x844", "1920x1200"]
+    },
+    "asset_sources": {
+      "logo": "logo-generator skill output; current fallback text wordmark",
+      "avatars": "deterministic CSS stamps seeded by agent id",
+      "generated_images": [],
+      "cutout_assets": {
+        "raw_dirs": [],
+        "output_dirs": [],
+        "command": "not used for P0; proof-console visual system is UI-native"
+      }
+    },
+    "motion": ["CSS motion", "optional framer-motion if already installed"]
+  },
+  "web3": {
+    "chain": "mantle-sepolia-optional-event + ready-calldata fallback",
+    "winnerThesis": {
+      "trackProblem": "agent buyers need useful-work proof before payout and reputation",
+      "winnerPattern": "protocol action primitive",
+      "winnerFamily": "agentic economy proof",
+      "chainPrimitive": "receipt hash anchored through Mantle Sepolia event or generated calldata",
+      "userAction": "score an agent task into payout/no-payout and reputation delta",
+      "proofSurface": "receipt hash, calldata, optional tx hash/event, explorer link when configured",
+      "genericCloneToAvoid": "wallet dashboard / agent directory / crypto chatbot"
+    },
+    "contractsFramework": "hardhat or viem script",
+    "walletLibs": ["viem"],
+    "envBakedDemo": false,
+    "demoWalletPlacement": "wallet-free first minute; optional notarization after receipt exists",
+    "demoRoles": ["judge", "task sponsor", "agent builder"],
+    "chainId": 5003,
+    "rpc": "https://rpc.sepolia.mantle.xyz",
+    "explorer": "https://explorer.sepolia.mantle.xyz"
+  },
+  "deploy": {
+    "frontend": "cloudflare-workers",
+    "backend": "cloudflare-workers",
+    "adapter": "@opennextjs/cloudflare",
+    "bindings": {
+      "d1": [],
+      "kv": [],
+      "r2": [],
+      "queues": []
+    },
+    "contracts": "optional Mantle Sepolia ProofBenchReceiptEmitter deployment when PRIVATE_KEY is provided",
+    "production_url": "https://proofbench.veithly.workers.dev",
+    "production_version_id": "cf9e4687-f05f-4bf2-9728-ae5f7a066ac9",
+    "smoke_tested_at": "2026-06-08T20:46:06+08:00",
+    "smoke_evidence": {
+      "proof_health": "curl https://proofbench.veithly.workers.dev/api/proof-health",
+      "playwright_live": "PLAYWRIGHT_BASE_URL=https://proofbench.veithly.workers.dev npx playwright test tests/onboard.spec.ts tests/receipt-detail-integrity.spec.ts tests/chain-limitation-fallback.spec.ts tests/keyboard-accessibility.spec.ts",
+      "visual_qa_live": "visual_qa_scan.mjs --url https://proofbench.veithly.workers.dev --routes /,/run,/ledger,/proof,/about --fail-on error; 10/10 desktop/mobile route scans passed with 0 errors and 0 warnings",
+      "browser_live_desktop": "desktop hero path generated PASS receipt with ready calldata and no UI errors",
+      "browser_live_mobile": "390x844 mobile viewport had no horizontal overflow and no small visible tap targets"
+    },
+    "cloudflare_override_reason": ""
+  },
+  "required_env": [
+    {
+      "name": "NEXT_PUBLIC_MANTLE_SEPOLIA_RPC_URL",
+      "scope": "client-public",
+      "required_for": "chain metadata and optional proof panel",
+      "official_key_url": "https://docs.mantle.xyz/",
+      "storage": ".env.local or default app constant",
+      "status": "configured"
+    },
+    {
+      "name": "MANTLE_SEPOLIA_RPC_URL",
+      "scope": "server",
+      "required_for": "optional Sepolia event notarization",
+      "official_key_url": "https://docs.mantle.xyz/",
+      "storage": ".env.local / Wrangler variable",
+      "status": "configured"
+    },
+    {
+      "name": "RELAYER_PRIVATE_KEY",
+      "scope": "server-secret",
+      "required_for": "optional live Mantle Sepolia event write",
+      "official_key_url": "https://docs.mantle.xyz/network/for-developers/mantle-sepolia-testnet",
+      "storage": ".env.local for local scripts; Wrangler secret only if runtime signing is enabled",
+      "status": "not-required",
+      "required": false,
+      "optional": true,
+      "alias_of": "PRIVATE_KEY"
+    },
+    {
+      "name": "PRIVATE_KEY",
+      "scope": "server-secret",
+      "required_for": "optional live Mantle Sepolia event write through POST /api/notarize",
+      "official_key_url": "https://docs.mantle.xyz/network/for-developers/mantle-sepolia-testnet",
+      "storage": ".env.local for local scripts; Wrangler secret only if runtime signing is enabled",
+      "status": "not-required",
+      "required": false,
+      "optional": true
+    },
+    {
+      "name": "PROOFBENCH_EMITTER_ADDRESS",
+      "scope": "server",
+      "required_for": "optional target contract for Mantle Sepolia event write",
+      "official_key_url": "https://explorer.sepolia.mantle.xyz",
+      "storage": ".env.local / Wrangler variable",
+      "status": "not-required",
+      "required": false,
+      "optional": true
+    }
+  ],
+  "real_data_sources": [
+    {
+      "id": "quote-guard-fixture",
+      "type": "dataset",
+      "source": "versioned quote_guard_v1/QG-MNT-001 dataset served by /api/fixtures/quote-guard-v1 and bound to Mantle Sepolia metadata https://rpc.sepolia.mantle.xyz",
+      "evidence": "task hash, quote hashes, and deterministic replay in receipt"
+    },
+    {
+      "id": "deterministic-agent-manifests",
+      "type": "dataset",
+      "source": "DeltaScout and YieldChaser versioned agent manifests served by /api/agents with chain-compatible receipt hashes https://explorer.sepolia.mantle.xyz",
+      "evidence": "agent manifest hash and output hash"
+    },
+    {
+      "id": "receipt-ledger",
+      "type": "storage",
+      "source": "browser localStorage database proofbench.receipts.v1",
+      "evidence": "saved receipt card, receipt detail, and JSON export"
+    },
+    {
+      "id": "mantle-sepolia-proof",
+      "type": "chain",
+      "source": "https://rpc.sepolia.mantle.xyz",
+      "evidence": "Sepolia tx/event when relayer is configured, otherwise ready calldata"
+    }
+  ],
+  "product_backbone": {
+    "identity": "guest browser session",
+    "storage": "browser localStorage for P0; Cloudflare D1 planned for public share URLs",
+    "ownership_fields": ["sessionId", "agentId", "receiptId", "walletAddress"],
+    "multi_user_proof": "two browser sessions create independent local receipts; P1 public receipt URLs allow cross-user verification",
+    "stateless_exception_reason": "G4 P0 is an owner-scoped browser receipt bench: local ledger storage is intentional before public D1 share URLs, while every receipt still carries sessionId/userId/ownerId and deterministic replay proof."
+  },
+  "feature_density": {
+    "user_case_beats": [
+      {
+        "user_case": "HERO PATH",
+        "beat": "click Run agent task and load deterministic quote-guard fixture",
+        "route": "/",
+        "action_selector": "[data-testid='run-agent-task']",
+        "state_change": "run timeline and selected agent output update",
+        "backend_evidence": "GET /api/fixtures/quote-guard-v1 + POST /api/run-agent"
+      },
+      {
+        "user_case": "HERO PATH",
+        "beat": "visible evaluator produces PASS/FAIL and payout/no-payout",
+        "route": "/",
+        "action_selector": "[data-testid='verdict-card']",
+        "state_change": "verdict, payout, and reputation cards update",
+        "backend_evidence": "POST /api/evaluate"
+      },
+      {
+        "user_case": "HERO PATH",
+        "beat": "receipt is saved and opened",
+        "route": "/receipt/[receiptId]",
+        "action_selector": "[data-testid='receipt-card']",
+        "state_change": "receipt appears in local ledger and detail route",
+        "backend_evidence": "POST /api/receipts"
+      },
+      {
+        "user_case": "Buyer compares agents",
+        "beat": "replay original output under strict evaluator",
+        "route": "/ledger",
+        "action_selector": "[data-testid='replay-drawer']",
+        "state_change": "replay result shows standard PASS versus strict FAIL",
+        "backend_evidence": "POST /api/replay"
+      }
+    ]
+  },
+  "prd_coverage": {
+    "source": "pitch/project_prd.md",
+    "minimum": "every P0/P1 REQ-### row has route/API/real-data/test/deploy evidence before recording"
+  },
+  "extras": {
+    "auth": "none for P0",
+    "db": "localStorage P0, Cloudflare D1 future",
+    "analytics": null,
+    "errorTracking": null
+  }
+}
